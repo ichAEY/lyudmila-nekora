@@ -12873,8 +12873,10 @@ html body .mct-map-wrap > a::after {
     background: #fffbf3 !important;
     filter: none !important;
     opacity: 1 !important;
-    -webkit-mask: none !important;
-    mask: none !important;
+    /* The WebP paper is slightly uneven. Fade only its empty top and bottom
+       margins into the matching hero surface; the lashes and tools stay whole. */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent) !important;
+    mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent) !important;
     mix-blend-mode: normal !important;
   }
 }
