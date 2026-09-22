@@ -1,10 +1,11 @@
 const publicBase = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const assetBase = `${publicBase}/assets/lyudmila`;
 
 export default {
   basePath: publicBase,
 
   template: {
-    specialty: "generic",
+    specialty: "lashes",
     bookingProvider: "",
     reviewSource: "",
   },
@@ -91,12 +92,26 @@ export default {
 
   images: {
     logo: "",
-    portrait: `${publicBase}/placeholder.svg`,
-    about: `${publicBase}/placeholder.svg`,
+    portrait: `${assetBase}/master.webp`,
+    about: `${assetBase}/masterpc.webp`,
     favicon: `${publicBase}/placeholder.svg`,
-    heroDecoration: `${publicBase}/assets/template/hair-tools.png`,
+    heroDecoration: `${assetBase}/shablonLED.webp`,
     beforeAfter: [],
-    gallery: [],
+    gallery: [
+      "galery00001.webp",
+      "galery00002.webp",
+      "galery00003.webp",
+      "galery00004.webp",
+      "galery00005.webp",
+      "galery00006.webp",
+      "galery00007.webp",
+      "galery00008.webp",
+      "galery00009.webp",
+      "galery00010.webp",
+    ].map((file, index) => ({
+      src: `${assetBase}/portfolio/${file}`,
+      alt: `Работа Людмилы Некоры — фото ${index + 1}`,
+    })),
   },
 
   services: {

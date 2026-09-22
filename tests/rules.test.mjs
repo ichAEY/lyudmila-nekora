@@ -54,5 +54,6 @@ test("experience and specialty are explicit data-driven states", () => {
   assert.equal(experienceMode(makeSite({ master: { experienceYears: "8" } })), "known");
   assert.equal(specialtyMode(makeSite({ template: { specialty: "hair" } })), "hair");
   assert.equal(specialtyMode(makeSite({ template: { specialty: "nails" } })), "nails");
+  assert.equal(specialtyMode(makeSite({ template: { specialty: "lashes" } })), "lashes");
   assert.equal(specialtyMode(makeSite({ template: { specialty: "brows" } })), "generic");
 });

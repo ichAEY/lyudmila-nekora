@@ -48,7 +48,7 @@ for (const group of groups) {
 
 if (!site.location.timeZone) fail("location.timeZone must exist");
 if (!site.seo.siteUrl) fail("seo.siteUrl must exist");
-if (!["generic", "hair", "nails"].includes(specialtyMode(site))) fail("unsupported specialty");
+if (!["generic", "hair", "nails", "lashes"].includes(specialtyMode(site))) fail("unsupported specialty");
 
 const locales = normalizedLocales(site).map((item) => item.code);
 if (site.location.countryCode) {

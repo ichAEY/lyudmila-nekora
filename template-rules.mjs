@@ -104,7 +104,7 @@ export function experienceMode(site) {
 
 export function specialtyMode(site) {
   const specialty = String(site?.template?.specialty || "").toLowerCase();
-  if (specialty === "hair" || specialty === "nails") return specialty;
+  if (specialty === "hair" || specialty === "nails" || specialty === "lashes") return specialty;
   return "generic";
 }
 
