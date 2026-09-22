@@ -121,7 +121,7 @@ export default function MasterTemplate() {
   const [lightboxTransform, setLightboxTransform] = useState({ scale: 1, x: 0, y: 0 });
   const [reviewsPaused, setReviewsPaused] = useState(false);
   const [desktopGalleryPaused, setDesktopGalleryPaused] = useState(false);
-  const [openStatus, setOpenStatus] = useState<{ isOpen: boolean | null }>({
+  const [openStatus, setOpenStatus] = useState<{ isOpen: boolean | null; isWorkingDay?: boolean }>({
     isOpen: null,
   });
   const heroRef = useRef<HTMLElement>(null);
@@ -405,16 +405,24 @@ export default function MasterTemplate() {
     if (!site.location.scheduleCapitalized || !site.location.openTime || !site.location.closeTime) return;
 
     const updateStatus = () => {
+      const now = new Date();
       const parts = new Intl.DateTimeFormat("ru-RU", {
         timeZone: site.location.timeZone,
         hour: "2-digit",
         minute: "2-digit",
         hourCycle: "h23",
-      }).formatToParts(new Date());
+      }).formatToParts(now);
       const hours = Number(parts.find((part) => part.type === "hour")?.value ?? 0);
       const minutes = Number(parts.find((part) => part.type === "minute")?.value ?? 0);
       const minuteOfDay = hours * 60 + minutes;
-      setOpenStatus({ isOpen: minuteOfDay >= openMinutes && minuteOfDay < closeMinutes });
+      const weekday = new Intl.DateTimeFormat("en-US", {
+        timeZone: site.location.timeZone,
+        weekday: "short",
+      }).format(now);
+      const weekdayIndex = ({ Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 } as Record<string, number>)[weekday] ?? 0;
+      const workingDays = site.location.workingDays || [0, 1, 2, 3, 4, 5, 6];
+      const isWorkingDay = workingDays.includes(weekdayIndex);
+      setOpenStatus({ isOpen: isWorkingDay && minuteOfDay >= openMinutes && minuteOfDay < closeMinutes, isWorkingDay });
     };
 
     const frame = window.requestAnimationFrame(updateStatus);
@@ -1609,9 +1617,11 @@ export default function MasterTemplate() {
                   <i aria-hidden="true" />
                   {openStatus.isOpen === true
                     ? `${translatedText("Открыто до")} ${site.location.closeTime}`
-                    : openStatus.isOpen === false
-                      ? `${translatedText("Закрыто до")} ${site.location.openTime}`
-                      : translatedText(site.location.scheduleCapitalized)}
+                    : openStatus.isOpen === false && openStatus.isWorkingDay === false
+                      ? translatedText("Закрыто · сегодня выходной")
+                      : openStatus.isOpen === false
+                        ? `${translatedText("Закрыто до")} ${site.location.openTime}`
+                        : translatedText(site.location.scheduleCapitalized)}
                 </span>
               ) : null}
             </div>
