@@ -12838,18 +12838,18 @@ html body .mct-map-wrap > a::after {
   }
 }
 
-/* Lyudmila LED specialty: client-only hero integration. */
-.mct-hero.is-lashes,
-.mct-hero.is-lashes > .mct-shell {
-  background: #fffbf3 !important;
-  background-image: none !important;
-}
-
+/* Lyudmila LED specialty: the paper color covers the entire mobile hero. */
 @media (max-width: 767px) {
+  .mct-hero.is-lashes,
+  .mct-hero.is-lashes > .mct-shell,
   .mct-hero.is-lashes .mct-hero-visual,
   .mct-hero.is-lashes .mct-master-tools.is-lashes {
     background: #fffbf3 !important;
     background-image: none !important;
+  }
+
+  .mct-hero.is-lashes .mct-hero-led {
+    font-size: .68em;
   }
 
   .mct-hero.is-lashes .mct-master-tools.is-lashes {

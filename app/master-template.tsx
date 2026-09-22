@@ -1005,7 +1005,7 @@ export default function MasterTemplate() {
         </div>
       )}
 
-      <header className="mct-hero" id="mobile-top" ref={heroRef}>
+      <header className={`mct-hero${siteSpecialtyMode === "lashes" ? " is-lashes" : ""}`} id="mobile-top" ref={heroRef}>
         <div className="mct-shell">
           <div className="mct-topbar">
             <a className={`mct-brand${hasLogo(site) ? " mct-brand-master-image" : " mct-brand-master-text"}`} href="#mobile-top" aria-label={`${localizedMasterName}, наверх`}>
@@ -1089,7 +1089,9 @@ export default function MasterTemplate() {
                 </a>
               ) : null}
             </div>
-            <h1>{localizedMasterName}{site.master.name ? " — " : ""}{translatedText("ваш")} <em>{translatedText(siteHeroPreset.emphasis)}</em></h1>
+            <h1>{localizedMasterName}{site.master.name ? " — " : ""}{translatedText("ваш")} <em>{siteSpecialtyMode === "lashes"
+              ? translatedText(siteHeroPreset.emphasis).split(/(LED)/).map((part, index) => part === "LED" ? <span className="mct-hero-led" key={index}>{part}</span> : part)
+              : translatedText(siteHeroPreset.emphasis)}</em></h1>
             <p className="mct-hero-copy">{translatedText(siteHeroPreset.copy)}</p>
           </div>
           <div

@@ -28,6 +28,7 @@ test("Lyudmila Nekora client data is configured", () => {
   assert.equal(site.reviews.length, 0);
   assert.equal(site.images.gallery.length, 10);
   assert.equal(site.template.specialty, "lashes");
+  assert.match(html, /<header class="mct-hero is-lashes"/);
   assert.match(site.images.heroDecoration, /shablonLED\.webp$/);
   assert.equal(site.services.groups.length, 1);
   assert.equal(site.services.groups[0].services.length, 11);
