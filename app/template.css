@@ -12837,3 +12837,36 @@ html body .mct-map-wrap > a::after {
     content: none !important;
   }
 }
+
+/* Lyudmila LED specialty: keep the shared template intact, only normalize the lash hero. */
+.mct-hero.is-lashes .mct-led-term {
+  white-space: nowrap;
+}
+
+.mct-hero.is-lashes .mct-led-label {
+  display: inline-block;
+  font-size: .86em;
+  line-height: 1;
+  letter-spacing: -.035em;
+  vertical-align: .045em;
+}
+
+.mct-hero.is-lashes .mct-led-dash {
+  display: inline-block;
+  width: .27em;
+  height: 1.5px;
+  margin: 0 .045em;
+  background: currentColor;
+  border-radius: 999px;
+  vertical-align: .285em;
+}
+
+.mct-hero.is-lashes .mct-master-tools.is-lashes {
+  background: #f8f4ee !important;
+}
+
+.mct-hero.is-lashes .mct-master-tools.is-lashes .mct-master-hero-image {
+  mix-blend-mode: multiply !important;
+  -webkit-mask-image: radial-gradient(ellipse 88% 84% at 50% 50%, #000 0%, #000 76%, rgba(0,0,0,.96) 84%, transparent 100%) !important;
+  mask-image: radial-gradient(ellipse 88% 84% at 50% 50%, #000 0%, #000 76%, rgba(0,0,0,.96) 84%, transparent 100%) !important;
+}

@@ -1089,14 +1089,14 @@ export default function MasterTemplate() {
                 </a>
               ) : null}
             </div>
-            <h1>{localizedMasterName}{site.master.name ? " — " : ""}{translatedText("ваш")} <em>{translatedText(siteHeroPreset.emphasis)}</em></h1>
+            <h1>{localizedMasterName}{site.master.name ? " — " : ""}{translatedText("ваш")} <em>{siteSpecialtyMode === "lashes" && locale === "ru" ? <>мастер по <span className="mct-led-term"><span className="mct-led-label">LED</span><span className="mct-led-dash" aria-hidden="true" />наращиванию</span> ресниц</> : translatedText(siteHeroPreset.emphasis)}</em></h1>
             <p className="mct-hero-copy">{translatedText(siteHeroPreset.copy)}</p>
           </div>
           <div
             className="mct-hero-visual"
           >
             {(siteSpecialtyMode === "hair" || siteSpecialtyMode === "lashes") && site.images.heroDecoration ? (
-              <div className="mct-master-tools" aria-hidden="true"><img className="mct-master-hero-image" src={site.images.heroDecoration} alt="" /></div>
+              <div className={`mct-master-tools${siteSpecialtyMode === "lashes" ? " is-lashes" : ""}`} aria-hidden="true"><img className="mct-master-hero-image" src={site.images.heroDecoration} alt="" /></div>
             ) : null}
             <figure className="dct-hero-portrait">
               <img src={site.images.portrait} alt={`${localizedMasterName} — ${translatedText(site.master.imageAlt)}`} />
