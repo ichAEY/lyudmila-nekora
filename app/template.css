@@ -12850,6 +12850,7 @@ html body .mct-map-wrap > a::after {
 
   .mct-hero.is-lashes .mct-hero-led {
     font-size: .68em;
+    font-weight: 700;
   }
 
   .mct-hero.is-lashes .mct-master-tools.is-lashes {
@@ -12862,10 +12863,10 @@ html body .mct-map-wrap > a::after {
 
   .mct-hero.is-lashes .mct-master-tools.is-lashes .mct-master-hero-image {
     display: block !important;
-    width: auto !important;
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: 100% !important;
+    width: 112% !important;
+    max-width: none !important;
+    height: 112% !important;
+    max-height: none !important;
     object-fit: contain !important;
     object-position: center !important;
     transform: none !important;
