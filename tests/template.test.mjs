@@ -17,17 +17,18 @@ const html = fs.readFileSync("out/index.html", "utf8");
 const css = fs.readFileSync("app/template.css", "utf8");
 const component = fs.readFileSync("app/master-template.tsx", "utf8");
 
-test("static export builds from the empty template", () => {
+test("static export builds for the client site", () => {
   assert.match(html, /site-root/);
 });
 
-test("client data is empty in the base template", () => {
-  assert.equal(site.master.name, "");
-  assert.equal(site.location.city, "");
-  assert.equal(site.contacts.phoneDisplay, "");
+test("Lyudmila Nekora client data is configured", () => {
+  assert.equal(site.master.name, "Людмила");
+  assert.equal(site.location.city, "Москва");
+  assert.equal(site.contacts.phoneDisplay, "+7 (924) 825-21-25");
   assert.equal(site.reviews.length, 0);
   assert.equal(site.images.gallery.length, 0);
-  assert.equal(Object.values(site.services).flat().length, 0);
+  assert.equal(site.services.groups.length, 1);
+  assert.equal(site.services.groups[0].services.length, 11);
 });
 
 test("the clean template uses one canonical stylesheet and runtime", () => {
