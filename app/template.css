@@ -12838,44 +12838,43 @@ html body .mct-map-wrap > a::after {
   }
 }
 
-/* Lyudmila LED specialty: client-only optical corrections. */
+/* Lyudmila LED specialty: client-only hero integration. */
 .mct-hero.is-lashes,
-.mct-hero.is-lashes .mct-hero-visual,
-.mct-hero.is-lashes .mct-master-tools.is-lashes {
+.mct-hero.is-lashes > .mct-shell {
   background: #fffbf3 !important;
+  background-image: none !important;
 }
 
-.mct-hero.is-lashes .mct-led-term {
-  display: inline-block;
-  white-space: nowrap;
-}
+@media (max-width: 767px) {
+  .mct-hero.is-lashes .mct-hero-visual,
+  .mct-hero.is-lashes .mct-master-tools.is-lashes {
+    background: #fffbf3 !important;
+    background-image: none !important;
+  }
 
-.mct-hero.is-lashes .mct-led-label {
-  display: inline-block;
-  font: inherit;
-  font-size: .74em;
-  line-height: 1;
-  letter-spacing: -.02em;
-  vertical-align: .08em;
-}
+  .mct-hero.is-lashes .mct-master-tools.is-lashes {
+    inset: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: visible !important;
+  }
 
-.mct-hero.is-lashes .mct-led-dash {
-  display: inline-block;
-  width: .23em;
-  height: 1px;
-  margin: 0 .045em;
-  border: 0;
-  border-radius: 0;
-  background: currentColor;
-  vertical-align: .27em;
-}
-
-.mct-hero.is-lashes .mct-master-tools.is-lashes .mct-master-hero-image {
-  background: #fffbf3 !important;
-  mix-blend-mode: normal !important;
-  filter: none !important;
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
-  -webkit-mask: none !important;
-  mask: none !important;
+  .mct-hero.is-lashes .mct-master-tools.is-lashes .mct-master-hero-image {
+    display: block !important;
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    transform: none !important;
+    transform-origin: center !important;
+    background: #fffbf3 !important;
+    filter: none !important;
+    opacity: 1 !important;
+    -webkit-mask: none !important;
+    mask: none !important;
+    mix-blend-mode: normal !important;
+  }
 }

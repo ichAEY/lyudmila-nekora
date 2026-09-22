@@ -1089,7 +1089,7 @@ export default function MasterTemplate() {
                 </a>
               ) : null}
             </div>
-            <h1>{localizedMasterName}{site.master.name ? " — " : ""}{translatedText("ваш")} <em>{siteSpecialtyMode === "lashes" && locale === "ru" ? <>мастер по <span className="mct-led-term"><span className="mct-led-label">LED</span><span className="mct-led-dash" aria-hidden="true" />наращиванию</span> ресниц</> : translatedText(siteHeroPreset.emphasis)}</em></h1>
+            <h1>{localizedMasterName}{site.master.name ? " — " : ""}{translatedText("ваш")} <em>{translatedText(siteHeroPreset.emphasis)}</em></h1>
             <p className="mct-hero-copy">{translatedText(siteHeroPreset.copy)}</p>
           </div>
           <div
