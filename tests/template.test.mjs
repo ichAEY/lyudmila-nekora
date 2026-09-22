@@ -52,7 +52,7 @@ test("master and brand names participate in localization", () => {
   assert.ok(translationKeys.includes("Татьяна"));
   assert.match(component, /const localizedBrandName = translatedText\(site\.brand\.name \|\| site\.master\.name \|\| "TANEM"\)/);
   assert.match(component, /const localizedMasterName = translatedText\(site\.master\.name \|\| site\.brand\.name \|\| "TANEM"\)/);
-  assert.match(component, /<h1>\{localizedMasterName\}/);
+  assert.match(component, /<h1[^>]*>[\s\S]{0,300}\{localizedMasterName\}/);
   assert.match(component, /<span>\{localizedBrandName\}<\/span>/);
 });
 

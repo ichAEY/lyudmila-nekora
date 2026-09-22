@@ -1089,9 +1089,19 @@ export default function MasterTemplate() {
                 </a>
               ) : null}
             </div>
-            <h1>{localizedMasterName}{site.master.name ? " — " : ""}{translatedText("ваш")} <em>{siteSpecialtyMode === "lashes"
-              ? translatedText(siteHeroPreset.emphasis).split(/(LED)/).map((part, index) => part === "LED" ? <span className="mct-hero-led" key={index}>{part}</span> : part)
-              : translatedText(siteHeroPreset.emphasis)}</em></h1>
+            <h1 className={siteSpecialtyMode === "lashes" && locale === "ru" ? "mct-lashes-title" : undefined}>
+              {siteSpecialtyMode === "lashes" && locale === "ru" ? (
+                <>
+                  <span className="mct-lashes-line">{localizedMasterName} — {translatedText("ваш")}</span>
+                  <em>
+                    <span className="mct-lashes-line">мастер по <span className="mct-hero-led">LED</span> — </span>
+                    <span className="mct-lashes-line">наращивание ресниц</span>
+                  </em>
+                </>
+              ) : (
+                <>{localizedMasterName}{site.master.name ? " — " : ""}{translatedText("ваш")} <em>{translatedText(siteHeroPreset.emphasis)}</em></>
+              )}
+            </h1>
             <p className="mct-hero-copy">{translatedText(siteHeroPreset.copy)}</p>
           </div>
           <div
