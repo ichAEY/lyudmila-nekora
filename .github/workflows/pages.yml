@@ -48,6 +48,13 @@ jobs:
       - run: npm test
       - name: Render production scenarios
         run: npm run qa:scenarios
+      - name: Prepare GitHub Pages root fallback
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s out/index.html
+          cp out/index.html out/404.html
+          touch out/.nojekyll
       - id: pages-check
         name: Check whether Pages is enabled
         env:
