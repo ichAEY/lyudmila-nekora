@@ -53,10 +53,11 @@ test("master and brand names participate in localization", () => {
   assert.match(component, /<span>\{localizedBrandName\}<\/span>/);
 });
 
-test("portfolio and full gallery remain structural without client photos", () => {
+test("portfolio and full gallery render client photos", () => {
   assert.match(html, /id="mobile-portfolio"/);
   assert.match(html, /Смотреть все работы/);
-  assert.match(html, /mct-work-placeholder/);
+  assert.match(html, /galery00001\.webp/);
+  assert.match(html, /galery00010\.webp/);
   assert.doesNotMatch(html, /disabled=""[^>]*Смотреть все работы/);
 });
 
