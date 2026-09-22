@@ -1,0 +1,175 @@
+const publicBase = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+export default {
+  basePath: publicBase,
+
+  template: {
+    specialty: "generic",
+    bookingProvider: "",
+    reviewSource: "",
+  },
+
+  brand: {
+    name: "Некора Людмила Николаевна",
+    subtitle: "",
+    monogram: "ЛН",
+  },
+
+  master: {
+    name: "Людмила",
+    dative: "Людмиле",
+    genitive: "Людмилы",
+    instrumental: "Людмилой",
+    monogram: "ЛН",
+    profession: "Мастер по LED-наращиванию ресниц",
+    heroTitle: "",
+    heroEmphasis: "мастер по LED-наращиванию ресниц",
+    heroCaption: "LED-наращивание ресниц",
+    imageAlt: "мастер по LED-наращиванию ресниц",
+    heroCopy: "Опыт работы — 8 лет.",
+    visitMotto: "",
+    experienceYears: 8,
+    experienceAria: "8 лет опыта",
+    aboutTitle: "О мастере",
+    aboutLead: "Я Людмила — мастер по LED-наращиванию ресниц с опытом 8 лет.",
+    aboutParagraphs: [],
+    skills: [
+      "LED-наращивание ресниц",
+      "Ламинирование ресниц",
+      "Дизайн ресниц",
+    ],
+  },
+
+  location: {
+    country: "Россия",
+    countryCode: "RU",
+    city: "Москва",
+    metro: "Филатов Луг",
+    cityMetro: "Москва · м. Филатов Луг",
+    address: "ул. Малое Понизовье, 9",
+    mapCardAddress: "ул. Малое Понизовье, 9",
+    schedule: "",
+    scheduleCapitalized: "",
+    timeZone: "Europe/Moscow",
+    openTime: "",
+    closeTime: "",
+  },
+
+  contacts: {
+    phoneDisplay: "+7 (924) 825-21-25",
+    phoneHref: "tel:+79248252125",
+    channels: [
+      {
+        type: "whatsapp",
+        label: "WhatsApp",
+        url: "https://wa.me/79248252125",
+      },
+      {
+        type: "telegram",
+        label: "Telegram",
+        url: "https://t.me/+79248252125",
+      },
+    ],
+    messenger: null,
+  },
+
+  links: {
+    bookingUrl: "",
+    reviewsUrl: "",
+    mapUrl: "https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB.%20%D0%9C%D0%B0%D0%BB%D0%BE%D0%B5%20%D0%9F%D0%BE%D0%BD%D0%B8%D0%B7%D0%BE%D0%B2%D1%8C%D0%B5%2C%209",
+    routeUrl: "https://yandex.ru/maps/?rtext=~%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB.%20%D0%9C%D0%B0%D0%BB%D0%BE%D0%B5%20%D0%9F%D0%BE%D0%BD%D0%B8%D0%B7%D0%BE%D0%B2%D1%8C%D0%B5%2C%209&rtt=auto",
+    mobileMapEmbedUrl: "about:blank",
+    desktopMapEmbedUrl: "about:blank",
+    yandexMapHrefMatch: "yandex.ru/maps",
+  },
+
+  reputation: {
+    rating: "",
+    reviewCount: "",
+  },
+
+  images: {
+    logo: "",
+    portrait: `${publicBase}/placeholder.svg`,
+    about: `${publicBase}/placeholder.svg`,
+    favicon: `${publicBase}/placeholder.svg`,
+    heroDecoration: `${publicBase}/assets/template/hair-tools.png`,
+    beforeAfter: [],
+    gallery: [],
+  },
+
+  services: {
+    groups: [
+      {
+        id: "lashes",
+        label: "Ресницы",
+        services: [
+          { name: "Снятие наращенных ресниц", price: "500 ₽", time: "", description: "" },
+          { name: "Классическое наращивание ресниц", price: "3 000 ₽", time: "", description: "" },
+          { name: "Наращивание ресниц 1,5D", price: "3 200 ₽", time: "", description: "" },
+          { name: "Наращивание ресниц 2D", price: "3 400 ₽", time: "", description: "" },
+          { name: "Наращивание ресниц 2,5D", price: "3 600 ₽", time: "", description: "" },
+          { name: "Наращивание ресниц 3D", price: "3 700 ₽", time: "", description: "" },
+          { name: "Дизайн ресниц «Рваная линия»", price: "3 700 ₽", time: "", description: "" },
+          { name: "Дизайн ресниц «Лучики»", price: "3 700 ₽", time: "", description: "" },
+          { name: "Ламинирование ресниц", price: "2 500 ₽", time: "", description: "" },
+          { name: "Наращивание ресниц в уголках глаз", price: "2 700 ₽", time: "", description: "" },
+          { name: "Снятие ресниц другого мастера с последующим перенаращиванием", price: "300 ₽", time: "", description: "" },
+        ],
+      },
+    ],
+  },
+
+  i18n: {
+    localLocale: "ru",
+    locales: [
+      { code: "ru", label: "RU" },
+      { code: "en", label: "EN" },
+    ],
+    translations: {
+      en: {
+        "Некора Людмила Николаевна": "Lyudmila Nekora",
+        "Людмила": "Lyudmila",
+        "Мастер по LED-наращиванию ресниц": "LED eyelash extension specialist",
+        "мастер по LED-наращиванию ресниц": "LED eyelash extension specialist",
+        "LED-наращивание ресниц": "LED eyelash extensions",
+        "Опыт работы — 8 лет.": "8 years of experience.",
+        "О мастере": "About the specialist",
+        "Я Людмила — мастер по LED-наращиванию ресниц с опытом 8 лет.": "I’m Lyudmila, an LED eyelash extension specialist with 8 years of experience.",
+        "Ламинирование ресниц": "Lash lamination",
+        "Дизайн ресниц": "Lash design",
+        "Москва": "Moscow",
+        "Филатов Луг": "Filatov Lug",
+        "Москва · м. Филатов Луг": "Moscow · Filatov Lug metro",
+        "ул. Малое Понизовье, 9": "9 Maloye Ponizovye St.",
+        "Ресницы": "Eyelashes",
+        "Снятие наращенных ресниц": "Eyelash extension removal",
+        "Классическое наращивание ресниц": "Classic eyelash extensions",
+        "Наращивание ресниц 1,5D": "1.5D eyelash extensions",
+        "Наращивание ресниц 2D": "2D eyelash extensions",
+        "Наращивание ресниц 2,5D": "2.5D eyelash extensions",
+        "Наращивание ресниц 3D": "3D eyelash extensions",
+        "Дизайн ресниц «Рваная линия»": "Lash design “Ragged Line”",
+        "Дизайн ресниц «Лучики»": "Lash design “Rays”",
+        "Наращивание ресниц в уголках глаз": "Outer-corner eyelash extensions",
+        "Снятие ресниц другого мастера с последующим перенаращиванием": "Removal of another technician’s lashes with subsequent re-extension",
+      },
+    },
+  },
+
+  reviews: [],
+  promotions: [],
+  amenities: [],
+
+  seo: {
+    siteUrl: "https://ichaey.github.io/lyudmila-nekora/",
+    title: "Людмила Некора — LED-наращивание ресниц в Москве",
+    description: "Мастер по LED-наращиванию ресниц Людмила Некора. Москва, метро Филатов Луг.",
+    keywords: ["LED-наращивание ресниц", "наращивание ресниц", "Москва", "Филатов Луг"],
+    locale: "ru_RU",
+  },
+
+  analytics: {
+    yandexMetrikaId: "",
+  },
+};
