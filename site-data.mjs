@@ -148,6 +148,7 @@ export default {
         "Людмила": "Lyudmila",
         "Мастер по LED-наращиванию ресниц": "LED eyelash extension specialist",
         "мастер по LED — наращиванию ресниц": "LED eyelash extension specialist",
+        "мастер по LED-наращиванию ресниц": "LED eyelash extension specialist",
         "LED-наращивание ресниц": "LED eyelash extensions",
         "Опыт работы — 8 лет": "8 years of experience",
         "О мастере": "About the specialist",
