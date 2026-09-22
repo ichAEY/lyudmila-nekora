@@ -21,8 +21,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       pages-ready: ${{ steps.pages-check.outputs.enabled }}
-    env:
-      NEXT_PUBLIC_BASE_PATH: /lyudmila-nekora
     steps:
       - uses: actions/checkout@v5
       - name: Checkout approved Hair decoration source
