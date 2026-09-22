@@ -32,8 +32,10 @@ export default {
     experienceYears: 8,
     experienceAria: "8 лет опыта",
     aboutTitle: "О мастере",
-    aboutLead: "Я Людмила — мастер по LED-наращиванию ресниц.",
-    aboutParagraphs: [],
+    aboutLead: "Я Людмила, мастер по наращиванию ресниц с 8-летним опытом.",
+    aboutParagraphs: [
+      "Подбираю длину, изгиб и объём индивидуально, чтобы подчеркнуть взгляд и сохранить естественную гармонию образа.",
+    ],
     skills: [
       "LED-наращивание ресниц",
       "Ламинирование ресниц",
@@ -151,7 +153,8 @@ export default {
         "LED-наращивание ресниц": "LED eyelash extensions",
         "Опыт работы — 8 лет": "8 years of experience",
         "О мастере": "About the specialist",
-        "Я Людмила — мастер по LED-наращиванию ресниц.": "I’m Lyudmila, an LED eyelash extension specialist.",
+        "Я Людмила, мастер по наращиванию ресниц с 8-летним опытом.": "I’m Lyudmila, an eyelash extension specialist with 8 years of experience.",
+        "Подбираю длину, изгиб и объём индивидуально, чтобы подчеркнуть взгляд и сохранить естественную гармонию образа.": "I select the length, curl and volume individually to enhance your eyes while preserving the natural harmony of your look.",
         "Ламинирование ресниц": "Lash lamination",
         "Дизайн ресниц": "Lash design",
         "Москва": "Moscow",
