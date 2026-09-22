@@ -12886,3 +12886,45 @@ html body .mct-map-wrap > a::after {
     mix-blend-mode: normal !important;
   }
 }
+
+
+/* TANEM desktop system badge — white circular mark, desktop only. */
+@media (min-width: 768px) {
+  .mct-tanem-footer {
+    position: fixed !important;
+    right: 22px !important;
+    bottom: 22px !important;
+    z-index: 90 !important;
+    width: 54px !important;
+    min-width: 54px !important;
+    height: 54px !important;
+    min-height: 54px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: grid !important;
+    place-items: center !important;
+    border: 1px solid rgba(39, 33, 30, .09) !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, .96) !important;
+    color: #211d1b !important;
+    box-shadow: 0 12px 34px rgba(38, 30, 27, .14) !important;
+    text-decoration: none !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    backdrop-filter: blur(12px) !important;
+  }
+
+  .mct-tanem-footer .tanem-mark {
+    display: grid !important;
+    width: 34px !important;
+    height: 34px !important;
+    place-items: center !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    color: #211d1b !important;
+    font: 600 24px/1 "Cormorant Garamond", Georgia, serif !important;
+  }
+
+  .mct-tanem-footer .tanem-credit {
+    display: none !important;
+  }
+}
