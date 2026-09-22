@@ -186,7 +186,7 @@ export default {
   amenities: [],
 
   seo: {
-    siteUrl: "https://ichaey.github.io/lyudmila-nekora/",
+    siteUrl: "https://lyudmila-nekora.tanem.ru/",
     title: "Людмила Некора — LED-наращивание ресниц в Москве",
     description: "Мастер по LED-наращиванию ресниц Людмила Некора. Москва, метро Филатов Луг.",
     keywords: ["LED-наращивание ресниц", "наращивание ресниц", "Москва", "Филатов Луг"],
