@@ -46,11 +46,27 @@ jobs:
       - run: npm test
       - name: Render production scenarios
         run: npm run qa:scenarios
-      - name: Prepare GitHub Pages root fallback
+      - name: Add legacy GitHub Pages path without breaking custom domain
         shell: bash
         run: |
           set -euo pipefail
           test -s out/index.html
+          root_copy="$RUNNER_TEMP/lyudmila-root"
+          rm -rf "$root_copy"
+          cp -a out "$root_copy"
+          NEXT_PUBLIC_BASE_PATH=/lyudmila-nekora npm run build
+          mkdir -p "$root_copy/lyudmila-nekora"
+          cp -a out/. "$root_copy/lyudmila-nekora/"
+          rm -rf out
+          mv "$root_copy" out
+          test -s out/index.html
+          test -s out/lyudmila-nekora/index.html
+          test -s out/assets/lyudmila/portfolio/galery00002.webp
+          test -s out/lyudmila-nekora/assets/lyudmila/portfolio/galery00002.webp
+      - name: Prepare GitHub Pages root fallback
+        shell: bash
+        run: |
+          set -euo pipefail
           cp out/index.html out/404.html
           touch out/.nojekyll
       - id: pages-check
