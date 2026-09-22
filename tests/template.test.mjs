@@ -26,7 +26,9 @@ test("Lyudmila Nekora client data is configured", () => {
   assert.equal(site.location.city, "Москва");
   assert.equal(site.contacts.phoneDisplay, "+7 (924) 825-21-25");
   assert.equal(site.reviews.length, 0);
-  assert.equal(site.images.gallery.length, 0);
+  assert.equal(site.images.gallery.length, 10);
+  assert.equal(site.template.specialty, "lashes");
+  assert.match(site.images.heroDecoration, /shablonLED\.webp$/);
   assert.equal(site.services.groups.length, 1);
   assert.equal(site.services.groups[0].services.length, 11);
 });
