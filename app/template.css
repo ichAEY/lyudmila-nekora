@@ -12928,3 +12928,19 @@ html body .mct-map-wrap > a::after {
     display: none !important;
   }
 }
+
+
+/* Lyudmila: desktop-only fixes; retain the mobile presentation. */
+@media (min-width: 768px) {
+  .mct-tanem-footer {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Also override the more specific long-review flex rule. */
+  .mct-review-card.mct-review-card-mobile,
+  .mct-review-card.mct-review-card-mobile.is-long {
+    display: none !important;
+  }
+}
