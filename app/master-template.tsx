@@ -333,6 +333,12 @@ export default function MasterTemplate() {
     const firstSet = track?.querySelector<HTMLElement>(".dct-gallery-set");
     if (!viewport || !track || !firstSet) return;
 
+    // The moving desktop strip needs its photos even when clones start offscreen.
+    track.querySelectorAll<HTMLImageElement>(".dct-film-frame img").forEach((image) => {
+      image.loading = "eager";
+      image.decoding = "async";
+    });
+
     let frame = 0;
     let lastFrame = 0;
     const renderPosition = (nextOffset: number) => {
