@@ -1,0 +1,25 @@
+name: Compare RU GitHub Pages certificate cases
+on:
+  push:
+    branches: [audit/le-rate-limit-20260925]
+    paths: ['.github/workflows/compare-ru-pages.yml']
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Inspect public DNS and TLS without making changes
+        shell: bash
+        run: |
+          for h in ark-culture.ru nadezhdavolgina.ru bagdasaryan-studio.tanem.ru boshki-project.tanem.ru lyudmila-nekora.tanem.ru maria.tanem.ru esmeralda.tanem.ru; do
+            echo "===== $h ====="
+            for server in 1.1.1.1 ns1.reg.ru; do
+              echo "DNS @$server CNAME"; dig +time=2 +tries=1 @"$server" "$h" CNAME +short || true
+              echo "DNS @$server A"; dig +time=2 +tries=1 @"$server" "$h" A +short || true
+            done
+            echo "TLS:"
+            timeout 8 bash -c 'echo | openssl s_client -connect "$1:443" -servername "$1" 2>/dev/null | openssl x509 -noout -subject -issuer -dates' _ "$h" || true
+            curl -LsS -o /dev/null --connect-timeout 3 --max-time 8 -w 'HTTPS code=%{http_code} verify=%{ssl_verify_result}\n' "https://$h" || true
+          done
