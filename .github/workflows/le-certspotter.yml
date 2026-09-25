@@ -1,0 +1,46 @@
+name: LE CertSpotter audit
+on:
+  push:
+    branches: [audit/le-rate-limit-20260925]
+    paths: ['.github/workflows/le-certspotter.yml']
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query certificate transparency
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, urllib.request, urllib.parse, datetime
+          now=datetime.datetime.now(datetime.timezone.utc)
+          cutoff=now-datetime.timedelta(days=7)
+          url="https://api.certspotter.com/v1/issuances?domain=tanem.ru&include_subdomains=true&match_wildcards=true&expand=dns_names&expand=issuer"
+          req=urllib.request.Request(url,headers={"User-Agent":"TANEM-audit"})
+          with urllib.request.urlopen(req,timeout=45) as r:
+              rows=json.load(r)
+          print("ROWS="+str(len(rows)))
+          recent=[]
+          for x in rows:
+              issuer=json.dumps(x.get("issuer",{}),ensure_ascii=False)
+              if "Let's Encrypt" not in issuer and "ISRG" not in issuer:
+                  continue
+              s=str(x.get("not_before","")).replace("Z","+00:00")
+              try:
+                  dt=datetime.datetime.fromisoformat(s)
+                  if dt.tzinfo is None: dt=dt.replace(tzinfo=datetime.timezone.utc)
+                  else: dt=dt.astimezone(datetime.timezone.utc)
+              except Exception:
+                  continue
+              if dt < cutoff:
+                  continue
+              names=x.get("dns_names") or []
+              recent.append((dt,x.get("id"),names,issuer))
+          recent.sort()
+          print("NOW_UTC="+now.isoformat())
+          print("CUTOFF_UTC="+cutoff.isoformat())
+          print("LE_ISSUANCES_LAST_7D="+str(len(recent)))
+          for dt,i,names,issuer in recent:
+              print("CERT",dt.isoformat(),"|",",".join(names),"| id="+str(i))
+          PY
