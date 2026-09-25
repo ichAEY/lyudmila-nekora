@@ -1,0 +1,88 @@
+name: LE rate-limit audit
+on:
+  push:
+    branches: [audit/le-rate-limit-20260925]
+    paths: ['.github/workflows/le-limit-check.yml']
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Count Let's Encrypt certificates for tanem.ru
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, urllib.request, datetime, time
+          now = datetime.datetime.now(datetime.timezone.utc)
+          cutoff = now - datetime.timedelta(days=7)
+          print("NOW_UTC="+now.isoformat())
+          print("CUTOFF_UTC="+cutoff.isoformat())
+
+          urls = [
+              "https://crt.sh/?q=%25.tanem.ru&output=json",
+              "https://crt.sh/?q=tanem.ru&output=json",
+          ]
+          rows=[]
+          for url in urls:
+              req=urllib.request.Request(url,headers={"User-Agent":"TANEM-LE-audit/1.0"})
+              try:
+                  with urllib.request.urlopen(req,timeout=45) as r:
+                      data=json.load(r)
+                  print("CRT_ROWS", url, len(data))
+                  rows.extend(data)
+              except Exception as e:
+                  print("CRT_ERROR", url, repr(e))
+
+          seen={}
+          for row in rows:
+              issuer=str(row.get("issuer_name",""))
+              if not ("Let's Encrypt" in issuer or "ISRG" in issuer):
+                  continue
+              nb=str(row.get("not_before","")).strip().replace(" ", "T")
+              try:
+                  dt=datetime.datetime.fromisoformat(nb)
+                  if dt.tzinfo is None:
+                      dt=dt.replace(tzinfo=datetime.timezone.utc)
+                  else:
+                      dt=dt.astimezone(datetime.timezone.utc)
+              except Exception:
+                  continue
+              names={n.strip().lower() for n in str(row.get("name_value","")).splitlines() if n.strip()}
+              if not any(n=="tanem.ru" or n.endswith(".tanem.ru") for n in names):
+                  continue
+              serial=str(row.get("serial_number") or "").lower().replace(":","")
+              key=serial or str(row.get("id"))
+              old=seen.get(key)
+              if old is None or dt < old["dt"]:
+                  seen[key]={"dt":dt,"names":sorted(names),"issuer":issuer,"id":row.get("id"),"serial":serial}
+
+          recent=[v for v in seen.values() if v["dt"]>=cutoff]
+          recent.sort(key=lambda x:x["dt"])
+          print("UNIQUE_LE_CERTS_LAST_7D="+str(len(recent)))
+          for v in recent:
+              print("CERT",v["dt"].isoformat(),"|",",".join(v["names"]),"|",v["issuer"],"| serial="+v["serial"],"| crt_id="+str(v["id"]))
+
+          # Token-bucket approximation for the registered-domain limit:
+          # capacity 50, refill 1 token every 202 minutes.
+          capacity=50.0
+          refill_seconds=202*60
+          tokens=capacity
+          last=cutoff
+          for v in recent:
+              elapsed=(v["dt"]-last).total_seconds()
+              if elapsed>0:
+                  tokens=min(capacity,tokens+elapsed/refill_seconds)
+              tokens-=1
+              last=v["dt"]
+          elapsed=(now-last).total_seconds()
+          if elapsed>0:
+              tokens=min(capacity,tokens+elapsed/refill_seconds)
+          print("APPROX_TOKENS_AVAILABLE_NOW="+format(tokens,".2f"))
+          print("APPROX_RATE_LIMIT_ACTIVE_NOW="+("YES" if tokens<1 else "NO"))
+          if tokens<1:
+              seconds=(1-tokens)*refill_seconds
+              print("APPROX_NEXT_TOKEN_UTC="+(now+datetime.timedelta(seconds=seconds)).isoformat())
+          PY
