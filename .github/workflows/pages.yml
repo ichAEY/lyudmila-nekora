@@ -63,6 +63,20 @@ jobs:
           test -s out/lyudmila-nekora/index.html
           test -s out/assets/lyudmila/portfolio/galery00002.webp
           test -s out/lyudmila-nekora/assets/lyudmila/portfolio/galery00002.webp
+      - name: Publish correct root for repository Pages preview
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          custom_domain="$(gh api "repos/${{ github.repository }}/pages" --jq '.cname // ""')"
+          if [ -z "$custom_domain" ]; then
+            cp -a out/lyudmila-nekora/. out/
+            grep -q '/lyudmila-nekora/_next/' out/index.html
+            echo 'Publishing /lyudmila-nekora-prefixed assets at the Pages artifact root.'
+          else
+            echo "Retaining the root export for custom domain: $custom_domain"
+          fi
       - name: Prepare GitHub Pages root fallback
         shell: bash
         run: |
